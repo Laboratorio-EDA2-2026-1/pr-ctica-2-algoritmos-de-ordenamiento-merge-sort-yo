@@ -30,6 +30,7 @@
 
 // ---- Prototipos ----
 void mergeSort(int arr[], int left, int right);
+
 void merge(int arr[], int left, int mid, int right);
 
 int main() {
@@ -59,10 +60,54 @@ int main() {
 
 // ---- Implementa aquí tu función mergeSort ----
 void mergeSort(int arr[], int left, int right) {
-    // TODO
+    int mid;
+    if (left>=right)
+    {
+        return;
+    }
+    mid=(left+right)/2;
+    mergeSort(arr,left,mid);
+    mergeSort(arr,mid+1,right);
+    merge(arr,left,mid,right);
 }
 
 // ---- Implementa aquí tu función merge ----
 void merge(int arr[], int left, int mid, int right) {
-    // TODO
+    int nl,nr;
+    nl=mid-left+1;
+    nr=right-mid;
+
+    int *l = (int *)malloc(nl * sizeof(int));
+    int *r = (int *)malloc(nr * sizeof(int));
+
+    for (int i = 0; i < nl; ++i)
+    {
+        l[i]=arr[left+i];
+    }
+    for (int j = 0; j < nr; ++j)
+    {
+        r[j]=arr[mid+j+1];
+    }
+    int i=0, j=0;
+    int k=left;
+    while (i<nl && j<nr){
+        if (l[i]<r[j])
+        {
+            arr[k++]=l[i];
+            i=i+1;
+        } else {
+            arr[k++]=r[j];
+            j=j+1;
+        }
+    }
+    while (i<nl) {
+        arr[k]=l[i];
+        i=i+1;
+        k=k+1;
+    }
+    while (j<nr) {
+        arr[k]=r[j];
+        j=j+1;
+        k=k+1;
+    }
 }
